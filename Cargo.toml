@@ -1,0 +1,7 @@
+[package]
+name = "assert_hex"
+version = "0.1.0"
+authors = ["wcampbell"]
+edition = "2018"
+
+[dependencies]
