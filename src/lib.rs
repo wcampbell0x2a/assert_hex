@@ -15,7 +15,7 @@
 /// hex representation
 #[macro_export]
 macro_rules! assert_eq_hex {
-    ($left:expr, $right:expr) => ({
+    ($left:expr, $right:expr $(,)?) => ({
         match (&$left, &$right) {
             (left_val, right_val) => {
                 if !(*left_val == *right_val) {
@@ -28,9 +28,6 @@ macro_rules! assert_eq_hex {
                 }
             }
         }
-    });
-    ($left:expr, $right:expr,) => ({
-        $crate::assert_eq!($left, $right)
     });
     ($left:expr, $right:expr, $($arg:tt)+) => ({
         match (&($left), &($right)) {
@@ -55,7 +52,7 @@ macro_rules! assert_eq_hex {
 /// hex representation
 #[macro_export]
 macro_rules! assert_ne_hex {
-    ($left:expr, $right:expr) => ({
+    ($left:expr, $right:expr $(,)?) => ({
         match (&$left, &$right) {
             (left_val, right_val) => {
                 if *left_val == *right_val {
@@ -69,9 +66,6 @@ macro_rules! assert_ne_hex {
             }
         }
     });
-    ($left:expr, $right:expr,) => {
-        $crate::assert_ne!($left, $right)
-    };
     ($left:expr, $right:expr, $($arg:tt)+) => ({
         match (&($left), &($right)) {
             (left_val, right_val) => {
