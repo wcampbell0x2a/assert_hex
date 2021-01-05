@@ -39,7 +39,7 @@ macro_rules! assert_eq_hex {
                     panic!(r#"assertion failed: `(left == right)`
   left: `0x{:02x?}`,
  right: `0x{:02x?}`: {}"#, &*left_val, &*right_val,
-                           $crate::format_args!($($arg)+))
+                           format_args!($($arg)+))
                 }
             }
         }
@@ -76,7 +76,7 @@ macro_rules! assert_ne_hex {
                     panic!(r#"assertion failed: `(left != right)`
   left: `0x{:02x?}`,
  right: `0x{:02x?}`: {}"#, &*left_val, &*right_val,
-                           $crate::format_args!($($arg)+))
+                           format_args!($($arg)+))
                 }
             }
         }
