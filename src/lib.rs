@@ -23,8 +23,8 @@ macro_rules! assert_eq_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion failed: `(left == right)`
-  left: `0x{:02x?}`,
- right: `0x{:02x?}`"#, &*left_val, &*right_val)
+  left: `{:#x?}`,
+ right: `{:#x?}`"#, &*left_val, &*right_val)
                 }
             }
         }
@@ -37,8 +37,8 @@ macro_rules! assert_eq_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion failed: `(left == right)`
-  left: `0x{:02x?}`,
- right: `0x{:02x?}`: {}"#, &*left_val, &*right_val,
+  left: `{:#x?}`,
+ right: `{:#x?}`: {}"#, &*left_val, &*right_val,
                            format_args!($($arg)+))
                 }
             }
@@ -60,8 +60,8 @@ macro_rules! assert_ne_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion failed: `(left != right)`
-  left: `0x{:02x?}`,
- right: `0x{:02x?}`"#, &*left_val, &*right_val)
+  left: `{:#x?}`,
+ right: `{:#x?}`"#, &*left_val, &*right_val)
                 }
             }
         }
@@ -74,8 +74,8 @@ macro_rules! assert_ne_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion failed: `(left != right)`
-  left: `0x{:02x?}`,
- right: `0x{:02x?}`: {}"#, &*left_val, &*right_val,
+  left: `{:#x?}`,
+ right: `{:#x?}`: {}"#, &*left_val, &*right_val,
                            format_args!($($arg)+))
                 }
             }
@@ -113,10 +113,18 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion failed: `(left == right)`
-  left: `0x[00, 01, 02]`,
- right: `0x[46, 50, 40]`"#)]
+  left: `[
+    0x0,
+    0x1,
+    0x2,
+]`,
+ right: `[
+    0x46,
+    0x50,
+    0x40,
+]`"#)]
     fn test_eq_3() {
-        assert_eq_hex!(vec!(0x00, 0x01, 0x02), vec!(0x46, 0x50, 0x40));
+        assert_eq_hex!(vec![0x00, 0x01, 0x02], vec![0x46, 0x50, 0x40]);
     }
 
     #[test]
