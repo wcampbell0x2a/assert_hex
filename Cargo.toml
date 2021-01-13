@@ -5,6 +5,6 @@ authors = ["wcampbell"]
 edition = "2018"
 repository = "https://github.com/wcampbell0x2a/assert_hex"
 description = "Rust library to display assert panics in hexadecimal format"
-license = "GPL-3.0"
+license = "MIT"
 
 [dependencies]
