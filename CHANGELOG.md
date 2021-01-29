@@ -6,8 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2020-01-29
+- Fix README.md CHANGELOG.md links
+- Improve documentation
+
 ## [0.2.0] - 2020-01-13
-- Use MIT license ([issue](https://github.com/wcampbell0x2a/assert_hex/issues/2))
+- Use MIT license ([#2](https://github.com/wcampbell0x2a/assert_hex/issues/2))
 - Update `assert_{eq/ne}_bytes()` to using `{:#x?}` for debug output
 
 ## [0.1.1] - 2020-01-07
