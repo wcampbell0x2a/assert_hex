@@ -1,6 +1,7 @@
 # assert_hex
 [![Latest Version](https://img.shields.io/crates/v/assert_hex.svg)](https://crates.io/crates/assert_hex)
 [![Rust Documentation](https://docs.rs/assert_hex/badge.svg)](https://docs.rs/assert_hex)
+[![Crates.io](https://img.shields.io/crates/d/assert_hex)](https://crates.io/crates/assert_hex)
 
 display expression using `{:#x?}` format when false assertion causes `panic!()`.
 
