@@ -25,7 +25,7 @@ macro_rules! assert_eq_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion `left == right` failed
-  left: {:#x?},
+  left: {:#x?}
  right: {:#x?}"#, &*left_val, &*right_val)
                 }
             }
@@ -38,10 +38,9 @@ macro_rules! assert_eq_hex {
                     // The reborrows below are intentional. Without them, the stack slot for the
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
-                    panic!(r#"assertion `left == right` failed
-  left: {:#x?},
- right: {:#x?}: {}"#, &*left_val, &*right_val,
-                           format_args!($($arg)+))
+                    panic!(r#"assertion `left == right` failed: {}
+  left: {:#x?}
+ right: {:#x?}"#, format_args!($($arg)+) &*left_val, &*right_val)
                 }
             }
         }
@@ -62,7 +61,7 @@ macro_rules! assert_ne_hex {
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
                     panic!(r#"assertion `left != right` failed
-  left: {:#x?},
+  left: {:#x?}
  right: {:#x?}"#, &*left_val, &*right_val)
                 }
             }
@@ -75,10 +74,9 @@ macro_rules! assert_ne_hex {
                     // The reborrows below are intentional. Without them, the stack slot for the
                     // borrow is initialized even before the values are compared, leading to a
                     // noticeable slow down.
-                    panic!(r#"assertion `left != right` failed
-  left: {:#x?},
- right: {:#x?}: {}"#, &*left_val, &*right_val,
-                           format_args!($($arg)+))
+                    panic!(r#"assertion `left != right` failed: {}
+  left: {:#x?}
+ right: {:#x?}"#, format_args!($($arg)+), &*left_val, &*right_val)
                 }
             }
         }
@@ -91,7 +89,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion `left == right` failed
-  left: 0x50,
+  left: 0x50
  right: 0x46"#)]
     fn test_eq_0() {
         assert_eq_hex!(0x50, 0x46);
@@ -99,7 +97,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion `left == right` failed
-  left: 0xff,
+  left: 0xff
  right: 0x46"#)]
     fn test_eq_1() {
         assert_eq_hex!(0xff, 0x46);
@@ -107,7 +105,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion `left == right` failed
-  left: 0xff,
+  left: 0xff
  right: 0x46"#)]
     fn test_eq_2() {
         assert_eq_hex!(0xff, 0x46);
@@ -119,7 +117,7 @@ mod tests {
     0x0,
     0x1,
     0x2,
-],
+]
  right: [
     0x46,
     0x50,
@@ -131,7 +129,7 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion `left != right` failed
-  left: 0x50,
+  left: 0x50
  right: 0x50"#)]
     fn test_ne_0() {
         assert_ne_hex!(0x50, 0x50);
@@ -139,9 +137,17 @@ mod tests {
 
     #[test]
     #[should_panic(expected = r#"assertion `left != right` failed
-  left: 0xff,
+  left: 0xff
  right: 0xff"#)]
     fn test_ne_1() {
         assert_ne_hex!(0xff, 0xff);
+    }
+
+    #[test]
+    #[should_panic(expected = r#"assertion `left != right` failed: yikes
+  left: 0xff
+ right: 0xff"#)]
+    fn test_ne_more() {
+        assert_ne_hex!(0xff, 0xff, "yikes");
     }
 }
