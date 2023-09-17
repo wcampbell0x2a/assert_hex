@@ -40,7 +40,7 @@ macro_rules! assert_eq_hex {
                     // noticeable slow down.
                     panic!(r#"assertion `left == right` failed: {}
   left: {:#x?}
- right: {:#x?}"#, format_args!($($arg)+) &*left_val, &*right_val)
+ right: {:#x?}"#, format_args!($($arg)+), &*left_val, &*right_val)
                 }
             }
         }
@@ -125,6 +125,14 @@ mod tests {
 ]"#)]
     fn test_eq_3() {
         assert_eq_hex!(vec![0x00, 0x01, 0x02], vec![0x46, 0x50, 0x40]);
+    }
+
+    #[test]
+    #[should_panic(expected = r#"assertion `left == right` failed: yikes
+  left: 0xff
+ right: 0x0"#)]
+    fn test_eq_more() {
+        assert_eq_hex!(0xff, 0x00, "yikes");
     }
 
     #[test]
