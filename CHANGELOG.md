@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2023-09-14
+- Fix regression with panics with extra messages such as: `assert_eq_hex!(0xff, 0x00, "yikes")`. ([@hortont424](https://github.com/hortont424)) ([#9](https://github.com/wcampbell0x2a/assert_hex/pull/9))
+
 ## [0.4.0] - 2023-09-10
 - Further update panic string format to match rust std
 
